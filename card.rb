@@ -21,7 +21,7 @@ class Card
   end
 
   def ace?
-    @suit == 'A'
+    @value == 'A'
   end
 
   def cost

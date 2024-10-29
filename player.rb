@@ -11,7 +11,7 @@ class Player < Human
   def make_decision(decision)
     case decision
     when 'a'
-      return :show_cards if @cards.length == 3 || @cards.map(&:cost).reduce(0, :+) >= 17
+      return :show_cards if @cards.length == 3 || @cards.map(&:cost).reduce(0, :+) >= 21
 
       :add_card
     when 'o'

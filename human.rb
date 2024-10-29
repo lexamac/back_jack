@@ -48,4 +48,8 @@ class Human
   def make_decision(_decision)
     raise NotImplementedError.new('Method not implemented yet!')
   end
+
+  def free_cards
+    @cards = []
+  end
 end
