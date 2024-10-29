@@ -25,12 +25,17 @@ class Game
         return true if option == 'e'
 
         decision = player.make_decision(option)
-        case decision
-        when :add_card
-          player.take_card(@deck.pull!)
-          @bank.topup(player.give_money(10))
-        when :show_cards then @finished = true
-        when :skip then @bank.topup(player.give_money(10))
+        begin
+          case decision
+          when :add_card
+            player.take_card(@deck.pull!)
+            @bank.topup(player.give_money(10))
+          when :show_cards then @finished = true
+          when :skip then @bank.topup(player.give_money(10))
+          end
+        rescue Exception => e
+          puts 'One of players doesn\'t have enough money. Game ended!'
+          return true
         end
 
         @finished ||= @players[0].size == 3 || @players[1].size == 3
@@ -68,7 +73,7 @@ class Game
         2.times { player.take_card(@deck.pull!) }
         @bank.topup(player.give_money(10))
       end
-    rescue Error => e
+    rescue Exception => e
       puts 'One of players doesn\'t have enough money. Game ended!'
     end
   end

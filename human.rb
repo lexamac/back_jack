@@ -35,7 +35,7 @@ class Human
   end
 
   def give_money(value)
-    raise Error.new('Not enough money in the bank') unless value < @bank.bank
+    raise Exception.new('Not enough money in the bank') unless value < @bank.bank
 
     @bank.withdraw(value)
     value
