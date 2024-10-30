@@ -84,10 +84,16 @@ class Game
     puts
     if @finished
       winner = nil
-      if @players[1].score(true) >= @players[0].score(true) && @players[1].score(true) <= 21
+      if @players[1].score(true) >= @players[0].score(true) && @players[1].score(true) <= 21 || @players[1].score(true) == 21
         winner = @players[1].name
         @players[1].take_money(@bank.bank)
       elsif @players[0].score(true) <= 21
+        winner = 'Game Dealer'
+        @players[0].take_money(@bank.bank)
+      elsif @players[1].score(true) <= @players[0].score(true)
+        winner = @players[1].name
+        @players[1].take_money(@bank.bank)
+      else
         winner = 'Game Dealer'
         @players[0].take_money(@bank.bank)
       end
